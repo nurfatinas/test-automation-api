@@ -1,0 +1,27 @@
+name: API Test Automation
+
+on:
+  push:
+    tags:
+      - 'smoke-*'    # any tag starting with "smoke-"
+      - 'v*'         # any version tag like v1.0, v2.1
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pytest smoke tests
+        run: pytest tests/ -m smoke --maxfail=1 --disable-warnings --html=artifact/report.html
