@@ -24,7 +24,7 @@ call "%env_path%\Scripts\activate"
 
 rem Upgrade pip and install dependencies
 python -m pip install --upgrade pip
-python -m pip install -r "%curr%requirements.txt"
+python -m pip install -r "requirements.txt"
 
 echo ================================
 echo TEST AUTOMATION STARTING
