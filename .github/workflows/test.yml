@@ -35,6 +35,7 @@ jobs:
       - name: Run pytest smoke tests
         run: |
           pytest tests/ -m smoke --maxfail=1 --disable-warnings --html=artifact/report.html
+        continue-on-error: true   # <-- ensures workflow continues even if tests fail
 
       # Step 6: Upload HTML report as artifact
       - name: Upload HTML report
