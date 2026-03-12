@@ -3,44 +3,38 @@ name: Smoke API Tests
 on:
   push:
     tags:
-      - 'smoke-*'   # triggers for tags like smoke-1.0
-  workflow_dispatch:   # allows manual triggering
+      - 'smoke-*'
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # Opt-in to Node.js 24
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-      # Step 1: Checkout code
       - uses: actions/checkout@v3
 
-      # Step 2: Setup Python
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Ensure artifact folder exists
       - name: Create artifact folder
         run: mkdir -p artifact
 
-      # Step 5: Run pytest smoke tests and generate HTML report
       - name: Run pytest smoke tests
         run: |
           pytest tests/ -m smoke --maxfail=1 --disable-warnings --html=artifact/report.html
-        continue-on-error: true   # ensures workflow continues even if tests fail
+        continue-on-error: true
 
-      # Step 6: Upload HTML report as artifact
       - name: Upload HTML report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # updated version
         with:
           name: smoke-report
           path: artifact/report.html
