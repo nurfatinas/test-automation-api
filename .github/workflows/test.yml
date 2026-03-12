@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'smoke-*'   # triggers for tags like smoke-1.0
+  workflow_dispatch:   # allows manual triggering
 
 jobs:
   test:
@@ -35,7 +36,7 @@ jobs:
       - name: Run pytest smoke tests
         run: |
           pytest tests/ -m smoke --maxfail=1 --disable-warnings --html=artifact/report.html
-        continue-on-error: true   # <-- ensures workflow continues even if tests fail
+        continue-on-error: true   # ensures workflow continues even if tests fail
 
       # Step 6: Upload HTML report as artifact
       - name: Upload HTML report
