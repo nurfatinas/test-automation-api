@@ -1,4 +1,3 @@
-# .github/workflows/smoke.yml
 name: Smoke API Tests
 
 on:
@@ -9,6 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # Opt-in to Node.js 24
 
     steps:
       # Step 1: Checkout code
