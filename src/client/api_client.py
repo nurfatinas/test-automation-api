@@ -42,7 +42,6 @@ class APIClient:
 
         return response
 
-
     def post(self, endpoint, json=None, headers=None):
         url = f"{self.base_url}{endpoint}"
 
@@ -52,7 +51,6 @@ class APIClient:
 
         return response
 
-
     def put(self, endpoint, json=None, headers=None):
         url = f"{self.base_url}{endpoint}"
 
@@ -61,7 +59,6 @@ class APIClient:
         self._log_response(response)
 
         return response
-
 
     def delete(self, endpoint, headers=None):
         url = f"{self.base_url}{endpoint}"
