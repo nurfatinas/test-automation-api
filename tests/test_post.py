@@ -1,5 +1,10 @@
 from src.assertions.response_validators import ValidateResponse
 from src.data.test_data import create_post_payload
+from src.utils.ai_helper import ai_analyze_response
+
+def test_get_post_ai(api_client):
+    response = api_client.get("/posts/1")
+    print(ai_analyze_response(response.json()))
 
 def test_get_post(api_client):
     response = api_client.get("/posts/1")

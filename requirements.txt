@@ -3,3 +3,4 @@ requests
 pyyaml
 pytest-html
 pytest-xdist
+openai
