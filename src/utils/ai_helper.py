@@ -27,18 +27,18 @@ def ai_analyze_response(response_json):
     safe_data = sanitize(response_json)
 
     prompt = f"""
-    Check this API response:
-    - Missing fields
-    - Null or empty values
-    - Structure issues
-    - Anything suspicious
+Check this API response:
+- Missing fields
+- Null or empty values
+- Structure issues
+- Anything suspicious
 
-    Response:
-    {safe_data}
-    """
+Response:
+{safe_data}
+"""
 
     try:
-        result = openai.ChatCompletion.create(
+        result = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}]
         )
